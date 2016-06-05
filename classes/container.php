@@ -28,7 +28,12 @@ class container
 
         $loader = new YamlFileLoader($this->container, new FileLocator(array(__DIR__ . '/../resources', getcwd())));
         $loader->load('services.yml');
-        $loader->load('.atoum.yml');
+
+        try {
+            $loader->load('.atoum.yml');
+        } catch (\InvalidArgumentException $e) {
+
+        }
 
         $this->container->compile();
     }
